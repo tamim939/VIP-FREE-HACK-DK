@@ -25,6 +25,8 @@ export default function App() {
   const [isMinimized, setIsMinimized] = useState(false);
   const [isLarge, setIsLarge] = useState(false);
 
+  const [loginError, setLoginError] = useState('');
+
   const list = [
     "SMALL 1,3", 
     "SMALL 2,4", 
@@ -73,13 +75,14 @@ export default function App() {
 
   const handleLogin = () => {
     if (navLocked) {
-      alert("ACCESS DENIED! Please complete registration and UNLOCK navigation first.");
+      setLoginError("Unlock nav on homepage first!");
       return;
     }
     if (keyInput === "joyvai") {
       setIsLoggedIn(true);
+      setLoginError('');
     } else {
-      alert("WRONG KEY! Access Denied.");
+      setLoginError("WRONG KEY! Access Denied.");
     }
   };
 
@@ -112,9 +115,9 @@ export default function App() {
           </>
         )}
 
-        {/* 3. Logout Blocker (Persistent): Blocks clicks on the logout button area even when nav is unlocked */}
+        {/* 3. Logout Blocker (Persistent): Blocks clicks on the logout button area (usually above the menu bar) */}
         <div 
-          className="absolute bottom-[5%] right-0 w-[30%] h-[10%] bg-transparent cursor-default z-20"
+          className="absolute bottom-[15%] left-0 w-full h-[10%] bg-transparent cursor-default z-20"
           title="Logout disabled"
         />
       </div>
@@ -172,6 +175,12 @@ export default function App() {
                   START HACK
                 </button>
                 
+                {loginError && (
+                  <p className="text-[8px] text-red-500 mt-1 font-bold animate-pulse">
+                    {loginError}
+                  </p>
+                )}
+                
                 <div className="pt-1 border-t border-white/10">
                   <button 
                     onClick={() => setNavLocked(!navLocked)}
@@ -204,6 +213,12 @@ export default function App() {
                   NEXT: <span className="text-red-500 font-bold">{seconds}</span>s
                 </div>
                 
+                {loginError && (
+                  <p className="text-[8px] text-red-500 mt-1 font-bold">
+                    {loginError}
+                  </p>
+                )}
+
                 <div className="space-y-1">
                   <button 
                     onClick={() => setNavLocked(!navLocked)}
