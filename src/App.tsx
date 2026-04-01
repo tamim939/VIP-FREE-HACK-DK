@@ -107,10 +107,10 @@ export default function App() {
               title="Navigation restricted"
             />
 
-            {/* 2. Login Button Blocker (Bottom) */}
+            {/* 2. Login & Menu Blocker (Bottom): Transparent to keep menu visible but non-clickable until unlocked */}
             <div 
               className="absolute bottom-0 left-0 w-full h-[15%] bg-transparent cursor-default z-10"
-              title="Login disabled - Please register first"
+              title="Navigation restricted - Please register first"
             />
           </>
         )}
